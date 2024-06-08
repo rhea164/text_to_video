@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text-to-Video Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; text-align: center; }
+        #prompt { width: 80%; padding: 10px; font-size: 16px; margin: 20px 0; }
+        #generate { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        #loading { display: none; color: #888; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <h1>Text-to-Video Generator</h1>
+    <input type="text" id="prompt" placeholder="Enter your prompt here...">
+    <button id="generate">Generate Video</button>
+    <p id="loading">Generating video, please wait...</p>
+    <div id="video_container"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#generate").click(function() {
+                var prompt = $("#prompt").val();
+                if (prompt) {
+                    $("#loading").show();
+                    $("#video_container").empty();
+
+                    $.post("/", { prompt: prompt }, function(data) {
+                        $("#loading").hide();
+                        $("#video_container").html('<video width="640" height="360" controls autoplay><source src="/static/videos/' + data.video + '" type="video/mp4">Your browser does not support the video tag.</video>');
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
