@@ -1,4 +1,4 @@
-🎬 AI-Powered Text-to-Video Generator
+🎬 AI-Powered Text-to-Video Generator <br>
 Transform a simple text prompt into a captivating video with AI-generated story, images, and audio.
 
 # 🚀 <b>Overview</b><br>
